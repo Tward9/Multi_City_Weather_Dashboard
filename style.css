@@ -4,3 +4,6 @@ button, #citySubmit{
 form{
     margin-left: .25em;
 }
+.form-label{
+    font-size: 30px;
+}
