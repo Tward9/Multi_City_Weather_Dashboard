@@ -11,11 +11,6 @@ $('#citySubmit').on('click', function (event) {
     getWeatherAPI();
     getForecastAPI();
     getUVIndex();
-    $('#currentWeatherlist').append(
-        $('<li/>')
-            .attr("id", "currentCity")
-            .text(city)
-    );
 })
 function getWeatherAPI() {
     console.log(city);
@@ -62,7 +57,9 @@ function getWeatherAPI() {
                 direction = 'NNW'
             }
             //add moment.js for date
-            // $('#currentWeather').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + data.weather.something.icon + '@2x.png'))
+            console.log(data.weather[0].icon);
+            $('#currentWeatherList').append($('<li/>').attr("id", "currentCity").text(city));
+            $('#currentWeather').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png'))
             $('#currentWeatherList').append($('<li/>').text('Temp: ' + ((data.main.temp - 273.15) * 9/5 + 32).toFixed(2) + ' Degrees F'));
             $('#currentWeatherList').append($('<li/>').text('Feels Like: ' + ((data.main.feels_like - 273.15) * 9/5 + 32).toFixed(2) + ' Degrees F'));
             $('#currentWeatherList').append($('<li/>').text('Wind: ' + data.wind.speed + ' MPH Direction: ' + direction));
