@@ -22,3 +22,16 @@ function getWeatherAPI(){
     })
 }
 $('#weatherBtn').on('click', getWeatherAPI);
+function getForecastAPI(){
+    console.log(city);
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+    console.log(queryURL);
+    fetch(queryURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+    })
+}
+$('#forecastBtn').on('click', getForecastAPI);
