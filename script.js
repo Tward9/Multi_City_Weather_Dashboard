@@ -6,9 +6,10 @@ $('#citySubmit').on('click', function(event){
     var newCity = $('#cityChoice').val();
     city = newCity
     console.log(city)
-    return city;
+    // return city;
+    getWeatherAPI();
+    getForecastAPI();
 })
-
 function getWeatherAPI(){
     console.log(city);
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
@@ -21,7 +22,7 @@ function getWeatherAPI(){
         console.log(data);
     })
 }
-$('#weatherBtn').on('click', getWeatherAPI);
+// $('#weatherBtn').on('click', getWeatherAPI);
 function getForecastAPI(){
     console.log(city);
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
@@ -34,4 +35,4 @@ function getForecastAPI(){
         console.log(data);
     })
 }
-$('#forecastBtn').on('click', getForecastAPI);
+// $('#forecastBtn').on('click', getForecastAPI);
