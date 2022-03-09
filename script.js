@@ -10,7 +10,8 @@ $('#citySubmit').on('click', function (event) {
     // return city;
     getWeatherAPI();
     getForecastAPI();
-    $('#currentWeather').append(
+    getUVIndex();
+    $('#currentWeatherlist').append(
         $('<li/>')
             .attr("id", "currentCity")
             .text(city)
@@ -60,10 +61,38 @@ function getWeatherAPI() {
             }else{
                 direction = 'NNW'
             }
-            $('#currentWeather').append($('<li/>').text('Temp: ' + ((data.main.temp - 273.15) * 9/5 + 32).toFixed(2) + ' Degrees F'));
-            $('#currentWeather').append($('<li/>').text('Feels Like: ' + ((data.main.feels_like - 273.15) * 9/5 + 32).toFixed(2) + ' Degrees F'));
-            $('#currentWeather').append($('<li/>').text('Wind: ' + data.wind.speed + ' MPH Direction: ' + direction));
-            $('#currentWeather').append($('<li/>').text('Humidity: ' + data.main.humidity + ' %'));
+            //add moment.js for date
+            // $('#currentWeather').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + data.weather.something.icon + '@2x.png'))
+            $('#currentWeatherList').append($('<li/>').text('Temp: ' + ((data.main.temp - 273.15) * 9/5 + 32).toFixed(2) + ' Degrees F'));
+            $('#currentWeatherList').append($('<li/>').text('Feels Like: ' + ((data.main.feels_like - 273.15) * 9/5 + 32).toFixed(2) + ' Degrees F'));
+            $('#currentWeatherList').append($('<li/>').text('Wind: ' + data.wind.speed + ' MPH Direction: ' + direction));
+            $('#currentWeatherList').append($('<li/>').text('Humidity: ' + data.main.humidity + ' %'));
+        })
+}
+function getUVIndex() {
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    fetch(queryURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data.coord.lat);
+            console.log(data.coord.lon);
+
+            var lat = data.coord.lat;
+            var lon = data.coord.lon;
+
+            var UVURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,daily,alerts&appid=' + APIKey;
+            fetch(UVURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data){
+                console.log(data);
+                console.log(data.current.uvi);
+                $('#currentWeatherList').append($('<li/>').attr("id", "UVIndex").text('UV Index: ' + data.current.uvi));
+                // console.log(data.current.weather);
+            })
         })
 }
 // save for later: http://openweathermap.org/img/wn/10d@2x.png
