@@ -3,6 +3,7 @@ var APIKey = '306e5a39201f9a04bf59daf2b8544d8a';
 $('#citySubmit').on('click', function (event) {
     city = 'Chicago'
     event.preventDefault();
+    $('#currentWeatherList').empty();
     $('#currentWeather').empty();
     var newCity = $('#cityChoice').val();
     city = newCity
@@ -88,13 +89,16 @@ function getUVIndex() {
                 console.log(data);
                 console.log(data.current.uvi);
                 $('#currentWeatherList').append($('<li/>').attr("id", "UVIndex").text('UV Index: ' + data.current.uvi));
-                // console.log(data.current.weather);
+                if (data.current.uvi<3) {
+                    $('#UVIndex').css('background-color', 'green');
+                }else if (data.current.uvi<8) {
+                    $('#UVIndex').css('background-color', 'yellow');
+                }else{
+                    $('#UVIndex').css('background-color', 'red');
+                }
             })
         })
 }
-// save for later: http://openweathermap.org/img/wn/10d@2x.png
-//weather icon. get from data.weather.icon
-//set as image link 'http://openweathermap.org/img/wn/' + data.weather.icon + '@2x.png'
 function getForecastAPI() {
     console.log(city);
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
@@ -104,10 +108,7 @@ function getForecastAPI() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                
-            }
+            
         })
 }
 // $('#forecastBtn').on('click', getForecastAPI);
