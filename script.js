@@ -114,7 +114,7 @@ function getForecastAPI() {
             var lon = data.coord.lon;
             
 
-            var dailyURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&appid=' + APIKey;
+            var dailyURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=current,minutely,hourly,alerts&appid=' + APIKey;
             fetch(dailyURL)
                 .then(function (response) {
                     return response.json();
