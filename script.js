@@ -3,11 +3,11 @@ var APIKey = '306e5a39201f9a04bf59daf2b8544d8a';
 //add moment.js for date
 
 var todaysDate = moment().format("dddd, MMM Do YYYY");
-var fdOneDate = moment().add(1,'days').format("dddd, MMM Do YYYY");
-fdTwoDate = moment().add(2,'days').format("dddd, MMM Do YYYY");
-fdThreeDate = moment().add(3,'days').format("dddd, MMM Do YYYY");
-fdFourDate = moment().add(4,'days').format("dddd, MMM Do YYYY");
-fdFiveDate = moment().add(5,'days').format("dddd, MMM Do YYYY");
+var fdOneDate = moment().add(1, 'days').format("dddd, MMM Do YYYY");
+fdTwoDate = moment().add(2, 'days').format("dddd, MMM Do YYYY");
+fdThreeDate = moment().add(3, 'days').format("dddd, MMM Do YYYY");
+fdFourDate = moment().add(4, 'days').format("dddd, MMM Do YYYY");
+fdFiveDate = moment().add(5, 'days').format("dddd, MMM Do YYYY");
 console.log(todaysDate);
 console.log(fdOneDate);
 
@@ -28,10 +28,32 @@ $('#citySubmit').on('click', function (event) {
     $('#forcastFiveList').empty();
     var newCity = $('#cityChoice').val();
     city = newCity
-    $('#searchHistory').append($('<li/>').append($('<button/>', { text: city, id: city + '_btn'})));
+    $('#searchHistory').append($('<li/>').append($('<button/>', { text: city }).addClass('city_btn')));
     getWeatherAPI();
     getForecastAPI();
     getUVIndex();
+    $('.city_btn').on('click', function (event) {
+        event.preventDefault();
+        console.log('click');
+        console.log(event.target.textContent);
+        city = event.target.textContent;
+        $('#currentWeatherList').empty();
+        $('#currentWeather').empty();
+        $('#forcastOne').empty();
+        $('#forcastOneList').empty();
+        $('#forcastTwo').empty();
+        $('#forcastTwoList').empty();
+        $('#forcastThree').empty();
+        $('#forcastThreeList').empty();
+        $('#forcastFour').empty();
+        $('#forcastFourList').empty();
+        $('#forcastFive').empty();
+        $('#forcastFiveList').empty();
+        event.stopImmediatePropagation();
+        getWeatherAPI();
+        getUVIndex();
+        getForecastAPI();
+    })
 })
 function getWeatherAPI() {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
@@ -127,7 +149,7 @@ function getForecastAPI() {
 
             var lat = data.coord.lat;
             var lon = data.coord.lon;
-            
+
 
             var dailyURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=current,minutely,hourly,alerts&appid=' + APIKey;
             fetch(dailyURL)
@@ -136,7 +158,7 @@ function getForecastAPI() {
                 })
                 .then(function (data) {
                     // console.log('forcast', data);
-                    
+
                     var fdOne = data.daily[1];
                     var fdTwo = data.daily[2];
                     var fdThree = data.daily[3];
@@ -152,13 +174,13 @@ function getForecastAPI() {
                     $('#forcastOneList').append($('<li/>').text('Temp: ' + ((fdOne.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastOneList').append($('<li/>').text('Feels Like: ' + ((fdOne.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastOneList').append($('<li/>').text('Wind: ' + fdOne.wind_speed + ' MPH'));
-                    
+
                     $('#fdTwoDate').text(fdTwoDate);
                     $('#forcastTwo').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdTwo.weather[0].icon + '@2x.png'))
                     $('#forcastTwoList').append($('<li/>').text('Temp: ' + ((fdTwo.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastTwoList').append($('<li/>').text('Feels Like: ' + ((fdTwo.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastTwoList').append($('<li/>').text('Wind: ' + fdTwo.wind_speed + ' MPH'));
-                    
+
                     $('#fdThreeDate').text(fdThreeDate);
                     $('#forcastThree').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdThree.weather[0].icon + '@2x.png'))
                     $('#forcastThreeList').append($('<li/>').text('Temp: ' + ((fdThree.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
@@ -176,7 +198,7 @@ function getForecastAPI() {
                     $('#forcastFiveList').append($('<li/>').text('Temp: ' + ((fdFive.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastFiveList').append($('<li/>').text('Feels Like: ' + ((fdFive.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastFiveList').append($('<li/>').text('Wind: ' + fdFive.wind_speed + ' MPH'));
-                    
+
                 })
         })
 }
