@@ -1,7 +1,11 @@
 var APIKey = '306e5a39201f9a04bf59daf2b8544d8a';
 
 //add moment.js for date
-
+$('#clear').on('click', function(event){
+    event.preventDefault();
+    localStorage.clear();
+    $('#searchHistory').empty();
+});
 var todaysDate = moment().format("dddd, MMM Do YYYY");
 var fdOneDate = moment().add(1, 'days').format("dddd, MMM Do YYYY");
 fdTwoDate = moment().add(2, 'days').format("dddd, MMM Do YYYY");
