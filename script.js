@@ -89,7 +89,7 @@ $('#citySubmit').on('click', function (event) {
     })
 })
 function getWeatherAPI() {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
     fetch(queryURL)
         .then(function (response) {
             return response.json();
@@ -131,7 +131,7 @@ function getWeatherAPI() {
             console.log(data.weather[0].icon);
             $('#currentWeatherList').append($('<li/>').attr("id", "currentCity").text(city));
             $('#currentWeatherDate').text(todaysDate);
-            $('#currentWeather').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png'))
+            $('#currentWeather').append($('<img/>').attr('src', 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png'))
             $('#currentWeatherList').append($('<li/>').text('Temp: ' + ((data.main.temp - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
             $('#currentWeatherList').append($('<li/>').text('Feels Like: ' + ((data.main.feels_like - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
             $('#currentWeatherList').append($('<li/>').text('Wind: ' + data.wind.speed + ' MPH Direction: ' + direction));
@@ -139,7 +139,7 @@ function getWeatherAPI() {
         })
 }
 function getUVIndex() {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
     fetch(queryURL)
         .then(function (response) {
             return response.json();
@@ -171,7 +171,7 @@ function getUVIndex() {
         })
 }
 function getForecastAPI() {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
     // console.log(queryURL);
     fetch(queryURL)
         .then(function (response) {
@@ -203,31 +203,31 @@ function getForecastAPI() {
                     //add rows similar to current day function for getting elements
                     //add lists into table collums to display
                     $('#fdOneDate').text(fdOneDate);
-                    $('#forcastOne').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdOne.weather[0].icon + '@2x.png'))
+                    $('#forcastOne').append($('<img/>').attr('src', 'https://openweathermap.org/img/wn/' + fdOne.weather[0].icon + '@2x.png'))
                     $('#forcastOneList').append($('<li/>').text('Temp: ' + ((fdOne.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastOneList').append($('<li/>').text('Feels Like: ' + ((fdOne.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastOneList').append($('<li/>').text('Wind: ' + fdOne.wind_speed + ' MPH'));
 
                     $('#fdTwoDate').text(fdTwoDate);
-                    $('#forcastTwo').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdTwo.weather[0].icon + '@2x.png'))
+                    $('#forcastTwo').append($('<img/>').attr('src', 'https://openweathermap.org/img/wn/' + fdTwo.weather[0].icon + '@2x.png'))
                     $('#forcastTwoList').append($('<li/>').text('Temp: ' + ((fdTwo.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastTwoList').append($('<li/>').text('Feels Like: ' + ((fdTwo.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastTwoList').append($('<li/>').text('Wind: ' + fdTwo.wind_speed + ' MPH'));
 
                     $('#fdThreeDate').text(fdThreeDate);
-                    $('#forcastThree').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdThree.weather[0].icon + '@2x.png'))
+                    $('#forcastThree').append($('<img/>').attr('src', 'https://openweathermap.org/img/wn/' + fdThree.weather[0].icon + '@2x.png'))
                     $('#forcastThreeList').append($('<li/>').text('Temp: ' + ((fdThree.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastThreeList').append($('<li/>').text('Feels Like: ' + ((fdThree.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastThreeList').append($('<li/>').text('Wind: ' + fdThree.wind_speed + ' MPH'));
 
                     $('#fdFourDate').text(fdFourDate);
-                    $('#forcastFour').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdFour.weather[0].icon + '@2x.png'))
+                    $('#forcastFour').append($('<img/>').attr('src', 'https://openweathermap.org/img/wn/' + fdFour.weather[0].icon + '@2x.png'))
                     $('#forcastFourList').append($('<li/>').text('Temp: ' + ((fdFour.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastFourList').append($('<li/>').text('Feels Like: ' + ((fdFour.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastFourList').append($('<li/>').text('Wind: ' + fdFour.wind_speed + ' MPH'));
 
                     $('#fdFiveDate').text(fdFiveDate);
-                    $('#forcastFive').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdFive.weather[0].icon + '@2x.png'))
+                    $('#forcastFive').append($('<img/>').attr('src', 'https://openweathermap.org/img/wn/' + fdFive.weather[0].icon + '@2x.png'))
                     $('#forcastFiveList').append($('<li/>').text('Temp: ' + ((fdFive.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastFiveList').append($('<li/>').text('Feels Like: ' + ((fdFive.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
                     $('#forcastFiveList').append($('<li/>').text('Wind: ' + fdFive.wind_speed + ' MPH'));
