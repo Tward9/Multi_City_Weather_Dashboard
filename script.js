@@ -10,7 +10,35 @@ fdFourDate = moment().add(4, 'days').format("dddd, MMM Do YYYY");
 fdFiveDate = moment().add(5, 'days').format("dddd, MMM Do YYYY");
 console.log(todaysDate);
 console.log(fdOneDate);
-
+let keys = Object.keys(localStorage);
+for(let key of keys) {
+  console.log(`${key}: ${localStorage.getItem(key)}`);
+  localStorage.getItem(key)
+  console.log(key);
+  $('#searchHistory').append($('<li/>').append($('<button/>', { text: key }).addClass('city_btn')));
+}
+$('.city_btn').on('click', function (event) {
+    event.preventDefault();
+    console.log('click');
+    console.log(event.target.textContent);
+    city = event.target.textContent;
+    $('#currentWeatherList').empty();
+    $('#currentWeather').empty();
+    $('#forcastOne').empty();
+    $('#forcastOneList').empty();
+    $('#forcastTwo').empty();
+    $('#forcastTwoList').empty();
+    $('#forcastThree').empty();
+    $('#forcastThreeList').empty();
+    $('#forcastFour').empty();
+    $('#forcastFourList').empty();
+    $('#forcastFive').empty();
+    $('#forcastFiveList').empty();
+    event.stopImmediatePropagation();
+    getWeatherAPI();
+    getUVIndex();
+    getForecastAPI();
+})
 $('#citySubmit').on('click', function (event) {
     city = 'Chicago'
     event.preventDefault();
@@ -28,6 +56,7 @@ $('#citySubmit').on('click', function (event) {
     $('#forcastFiveList').empty();
     var newCity = $('#cityChoice').val();
     city = newCity
+    localStorage.setItem(`${city}`, city);
     $('#searchHistory').append($('<li/>').append($('<button/>', { text: city }).addClass('city_btn')));
     getWeatherAPI();
     getForecastAPI();
