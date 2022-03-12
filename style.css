@@ -18,3 +18,9 @@ td{
 #currentCity{
     font-size: 2em;
 }
+#searchHistory{
+    display: flex;
+}
+#cityInput{
+    width: 15em;
+}
