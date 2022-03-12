@@ -7,3 +7,14 @@ form{
 .form-label{
     font-size: 30px;
 }
+ul{
+    list-style-type: none;
+    width: fit-content;
+}
+td{
+    margin: .5em;
+    padding: .25em;
+}
+#currentCity{
+    font-size: 2em;
+}
