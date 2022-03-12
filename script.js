@@ -43,9 +43,8 @@ $('.city_btn').on('click', function (event) {
     getUVIndex();
     getForecastAPI();
 })
-var cities = [];
-city = 'placeholder'
 $('#citySubmit').on('click', function (event) {
+    city = 'Chicago'
     event.preventDefault();
     $('#currentWeatherList').empty();
     $('#currentWeather').empty();
@@ -60,12 +59,9 @@ $('#citySubmit').on('click', function (event) {
     $('#forcastFive').empty();
     $('#forcastFiveList').empty();
     var newCity = $('#cityChoice').val();
-    if (!cities.includes(newCity)) {
-        city = newCity
-        localStorage.setItem(`${city}`, city);
-        $('#searchHistory').append($('<li/>').append($('<button/>', { text: city }).addClass('city_btn')));
-    }
-    cities.push(newCity)
+    city = newCity
+    localStorage.setItem(`${city}`, city);
+    $('#searchHistory').append($('<li/>').append($('<button/>', { text: city }).addClass('city_btn')));
     getWeatherAPI();
     getForecastAPI();
     getUVIndex();
