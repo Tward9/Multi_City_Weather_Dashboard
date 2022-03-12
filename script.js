@@ -5,6 +5,16 @@ $('#citySubmit').on('click', function (event) {
     event.preventDefault();
     $('#currentWeatherList').empty();
     $('#currentWeather').empty();
+    $('#forcastOne').empty();
+    $('#forcastOneList').empty();
+    $('#forcastTwo').empty();
+    $('#forcastTwoList').empty();
+    $('#forcastThree').empty();
+    $('#forcastThreeList').empty();
+    $('#forcastFour').empty();
+    $('#forcastFourList').empty();
+    $('#forcastFive').empty();
+    $('#forcastFiveList').empty();
     var newCity = $('#cityChoice').val();
     city = newCity
     console.log(city)
@@ -120,8 +130,40 @@ function getForecastAPI() {
                     return response.json();
                 })
                 .then(function (data) {
-                    console.log(data);
-                    //add table to html
+                    console.log('forcast', data);
+                    
+                    var fdOne = data.daily[1];
+                    var fdTwo = data.daily[2];
+                    var fdThree = data.daily[3];
+                    var fdFour = data.daily[4];
+                    var fdFive = data.daily[5];
+                    console.log(fdOne);
+                    console.log(fdOne.weather[0]);
+                    $('#forcastOne').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdOne.weather[0].icon + '@2x.png'))
+                    $('#forcastOneList').append($('<li/>').text('Temp: ' + ((fdOne.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastOneList').append($('<li/>').text('Feels Like: ' + ((fdOne.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastOneList').append($('<li/>').text('Wind: ' + fdOne.wind_speed + ' MPH'));
+
+                    $('#forcastTwo').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdTwo.weather[0].icon + '@2x.png'))
+                    $('#forcastTwoList').append($('<li/>').text('Temp: ' + ((fdTwo.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastTwoList').append($('<li/>').text('Feels Like: ' + ((fdTwo.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastTwoList').append($('<li/>').text('Wind: ' + fdTwo.wind_speed + ' MPH'));
+
+                    $('#forcastThree').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdThree.weather[0].icon + '@2x.png'))
+                    $('#forcastThreeList').append($('<li/>').text('Temp: ' + ((fdThree.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastThreeList').append($('<li/>').text('Feels Like: ' + ((fdThree.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastThreeList').append($('<li/>').text('Wind: ' + fdThree.wind_speed + ' MPH'));
+
+                    $('#forcastFour').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdFour.weather[0].icon + '@2x.png'))
+                    $('#forcastFourList').append($('<li/>').text('Temp: ' + ((fdFour.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastFourList').append($('<li/>').text('Feels Like: ' + ((fdFour.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastFourList').append($('<li/>').text('Wind: ' + fdFour.wind_speed + ' MPH'));
+
+                    $('#forcastFive').append($('<img/>').attr('src', 'http://openweathermap.org/img/wn/' + fdFive.weather[0].icon + '@2x.png'))
+                    $('#forcastFiveList').append($('<li/>').text('Temp: ' + ((fdFive.temp.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastFiveList').append($('<li/>').text('Feels Like: ' + ((fdFive.feels_like.day - 273.15) * 9 / 5 + 32).toFixed(2) + ' Degrees F'));
+                    $('#forcastFiveList').append($('<li/>').text('Wind: ' + fdFive.wind_speed + ' MPH'));
+                    // $('#forcastOneList').append($('<li/>').text('Humidity: ' + data.main.humidity + ' %'));
                     //add rows similar to current day function for getting elements
                     //add lists into table collums to display
                 })
