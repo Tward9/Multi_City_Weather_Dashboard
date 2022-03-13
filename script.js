@@ -1,4 +1,5 @@
 var APIKey = '306e5a39201f9a04bf59daf2b8544d8a';
+var cities = [];
 
 //add moment.js for date
 $('#clear').on('click', function(event){
@@ -20,6 +21,8 @@ for(let key of keys) {
   localStorage.getItem(key)
   console.log(key);
   $('#searchHistory').append($('<li/>').append($('<button/>', { text: key }).addClass('city_btn')));
+  cities.push(key);
+  console.log(cities);
 }
 $('.city_btn').on('click', function (event) {
     event.preventDefault();
@@ -43,8 +46,9 @@ $('.city_btn').on('click', function (event) {
     getUVIndex();
     getForecastAPI();
 })
+city = 'placeholder'
+
 $('#citySubmit').on('click', function (event) {
-    city = 'Chicago'
     event.preventDefault();
     $('#currentWeatherList').empty();
     $('#currentWeather').empty();
@@ -60,16 +64,22 @@ $('#citySubmit').on('click', function (event) {
     $('#forcastFiveList').empty();
     var newCity = $('#cityChoice').val();
     city = newCity
-    localStorage.setItem(`${city}`, city);
-    $('#searchHistory').append($('<li/>').append($('<button/>', { text: city }).addClass('city_btn')));
+    if (!cities.includes(newCity)) {
+        city = newCity
+        localStorage.setItem(`${city}`, city);
+        $('#searchHistory').append($('<li/>').append($('<button/>', { text: city }).addClass('city_btn')));
+    }
+    cities.push(newCity);
     getWeatherAPI();
     getForecastAPI();
     getUVIndex();
     $('.city_btn').on('click', function (event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
         console.log('click');
         console.log(event.target.textContent);
         city = event.target.textContent;
+        cities.push(city);
         $('#currentWeatherList').empty();
         $('#currentWeather').empty();
         $('#forcastOne').empty();
@@ -82,7 +92,6 @@ $('#citySubmit').on('click', function (event) {
         $('#forcastFourList').empty();
         $('#forcastFive').empty();
         $('#forcastFiveList').empty();
-        event.stopImmediatePropagation();
         getWeatherAPI();
         getUVIndex();
         getForecastAPI();
