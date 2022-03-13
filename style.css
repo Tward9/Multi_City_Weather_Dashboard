@@ -18,3 +18,20 @@ td{
 #currentCity{
     font-size: 2em;
 }
+#searchHistory{
+    display: flex;
+    width: 50%;
+}
+#cityChoice{
+    width: 15em;
+}
+
+button{
+    background-color: #45B8CC;
+    font-size: large;
+}
+body{
+    background-color: #3895A6;
+    margin-left: 1em;
+    font-size: 2em;
+}

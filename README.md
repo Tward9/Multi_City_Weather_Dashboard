@@ -10,6 +10,7 @@ The goal with this project was to create a dashboard that one could search for c
 See the deployed application [here](https://tward9.github.io/Multi_City_Weather_Dashboard/)
 
 When opened, you should see the below image:
+This image includes previous searches
 
 
-![Single Day Schedule landing page](Single_Day_Schedule_Page.png)
+![Single Day Schedule landing page](weather_Dashboard_with_searches.png)
